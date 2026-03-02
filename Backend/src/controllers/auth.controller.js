@@ -2,6 +2,7 @@ const userModel = require("../models/user.model")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
 const blackListModel = require("../models/blacklist.model")
+const redis  = require("../config/cache")
 
 async function registerController(req, res) {
     try {
@@ -133,16 +134,8 @@ async function logOutController(req,res){
 
     res.clearCookie("token")
 
-    const isAlreadyBlackListed = await blackListModel.findOne({token})
-    if(isAlreadyBlackListed){
-        return res.status(200).json({
-            message:"token already blacklisted"
-        })
-    }
-
-    const blacklistToken = await blackListModel.create({
-        token
-    })
+   
+   await redis.set(token,Date.now().toString())
 
     return res.status(200).json({
         message:"token blackListed successfully"
