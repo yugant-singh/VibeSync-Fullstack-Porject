@@ -1,21 +1,26 @@
 import React, { useState } from "react";
 import "../style/form.scss"
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from '../hooks/useAuth'
+import {useAuth} from '../hooks/useAuth'
+
 import Loader from "../../../shared/components/loader/Loader";
 const Register = () => {
-  const { user, loading, registerHandler } = useAuth()
+  const {loading,handleRegister} = useAuth()
+
+
   const [name, setName] = useState("")
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate()
-  async function submitHandler(e) {
-    e.preventDefault()
-    await registerHandler(name, username, email, password)
-    navigate("/")
+ 
+async function handleSubmit(e){
+e.preventDefault()
 
-  }
+await handleRegister({username,email,password,name})
+navigate("/")
+
+}
 
   if (loading) {
     return <Loader />
@@ -32,7 +37,7 @@ const Register = () => {
           <p>Create Your Account</p>
         </div>
 
-        <form onSubmit={submitHandler}>
+        <form onSubmit={handleSubmit} >
           <input
             type="text"
             placeholder="Enter Full Name"
@@ -61,8 +66,8 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button desabled={loading}  >
-            {loading ? "Creating Account..." : "Register"}
+          <button   >
+          Register
           </button>
 
         </form>

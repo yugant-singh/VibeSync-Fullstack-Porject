@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 const authRouter = require("../src/routes/auth.route")
+const songRouter = require("../src/routes/song.route")
 const cookieParser = require("cookie-parser")
 const cors = require("cors")
 app.use(express.json())
@@ -10,6 +11,8 @@ app.use(cors({
 }))
 app.use(cookieParser())
 app.use("/api/auth",authRouter)   // prefix /api/auth
+app.use("/api/songs",songRouter)
+
 
 
 

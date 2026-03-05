@@ -1,21 +1,26 @@
-import React from 'react'
+import React, { use } from 'react'
 import  { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {useAuth} from '../hooks/useAuth'
+
 import Loader from '../../../shared/components/loader/Loader';
 const Login = () => {
+  const {loading,handleLogin} = useAuth()
     const [username, setUsername] = useState("");
-    //   const [email, setEmail] = useState("");
+      // const [email, setEmail] = useState("");
       const [password, setPassword] = useState("");
-      const {loading,user,loginHandler} = useAuth()
+      
       const navigate = useNavigate()
 
-      async function submitHandler(e){
+      async function handleSubmit(e){
         e.preventDefault()
-await loginHandler()
-navigate("/")
+        await handleLogin({username,password})
+        navigate("/")
 
       }
+     
+
+   
 
       if(loading){
         return <Loader/>
@@ -31,7 +36,7 @@ navigate("/")
               <p>Welcome Back</p>
             </div>
     
-            <form onSubmit={submitHandler}>
+            <form onSubmit={handleSubmit}>
     
               <input
                 type="text"
@@ -39,13 +44,13 @@ navigate("/")
                 value={username}
                 onChange={(e)=>setUsername(e.target.value)}
               />
-    
-              {/* <input
+{/*     
+             <input
                 type="email"
                 placeholder="Enter Email"
                 value={email}
                 onChange={(e)=>setEmail(e.target.value)}
-              /> */}
+              />  */}
     
               <input
                 type="password"
@@ -54,8 +59,9 @@ navigate("/")
                 onChange={(e)=>setPassword(e.target.value)}
               />
     
-              <button desable={loading}>
-               {loading?"Logging in...":"Login"}
+              <button desabled={loading} >
+         
+         {loading?"Loging...":"Login"}
               </button>
     
             </form>
