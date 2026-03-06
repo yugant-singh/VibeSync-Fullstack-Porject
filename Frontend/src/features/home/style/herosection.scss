@@ -1,0 +1,308 @@
+
+
+// ── Variables ──────────────────────────────────────────
+$bg:            #0a0a0f;
+$accent:        #7c6aff;
+$accent-soft:   rgba(124, 106, 255, 0.15);
+$accent-glow:   rgba(124, 106, 255, 0.4);
+$accent-2:      #ff6ab0;
+$accent-2-glow: rgba(255, 106, 176, 0.3);
+$text:          #f0eeff;
+$text-muted:    rgba(240, 238, 255, 0.5);
+$border:        rgba(255, 255, 255, 0.07);
+
+// ── Hero ───────────────────────────────────────────────
+.hero {
+  background-image: url(../../../../public/music/vibe.jpg);
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  justify-content: center;
+
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
+  padding: 6rem 2rem 4rem;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+
+  &--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  // ── Glow Orbs ──
+  &__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+
+    &--1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(124, 106, 255, 0.18), transparent 70%);
+      top: -100px;
+      left: -100px;
+      animation: float-1 9s ease-in-out infinite;
+    }
+
+    &--2 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255, 106, 176, 0.14), transparent 70%);
+      bottom: -80px;
+      right: -80px;
+      animation: float-2 11s ease-in-out infinite;
+    }
+  }
+
+  // ── Content ──
+  &__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+    max-width: 640px;
+  }
+
+  // ── Greeting ──
+  &__greeting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+  &__wave {
+    font-size: 2.2rem;
+    display: inline-block;
+    animation: wave 2.5s ease-in-out infinite;
+    transform-origin: 70% 70%;
+  }
+
+  &__welcome {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: $text-muted;
+    margin: 0;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  &__name {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: $text;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  // ── Headline ──
+  &__headline {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    font-weight: 800;
+    color: $text;
+    margin: 0;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  &__highlight {
+    color: $accent;
+    text-shadow: 0 0 30px $accent-glow;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, $accent, $accent-2);
+      border-radius: 2px;
+      opacity: 0.7;
+    }
+  }
+
+  // ── Moods ──
+  &__moods {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__mood-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.6rem 0.9rem;
+    border-radius: 14px;
+    border: 1px solid $border;
+    background: rgba(255, 255, 255, 0.03);
+    transition: all 0.3s ease;
+    cursor: default;
+
+    &--active {
+      border-color: rgba(124, 106, 255, 0.5);
+      background: $accent-soft;
+      transform: translateY(-4px) scale(1.08);
+      box-shadow: 0 8px 24px $accent-glow;
+
+      .hero__mood-emoji {
+        animation: bounce 0.5s ease;
+      }
+
+      .hero__mood-label {
+        color: $accent;
+      }
+    }
+  }
+
+  &__mood-emoji {
+    font-size: 1.8rem;
+    line-height: 1;
+  }
+
+  &__mood-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: $text-muted;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+
+  // ── CTA Button ──
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 2.2rem;
+    background: linear-gradient(135deg, $accent, #9b8fff);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 24px $accent-glow;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    &:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 32px $accent-glow;
+
+      &::before {
+        opacity: 1;
+      }
+
+      .hero__cta-arrow {
+        transform: translateX(4px);
+      }
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  &__cta-icon {
+    font-size: 1.1rem;
+  }
+
+  &__cta-arrow {
+    font-size: 1rem;
+    transition: transform 0.2s ease;
+    display: inline-block;
+  }
+
+  // ── Tagline ──
+  &__tagline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: $text-muted;
+    margin: 0;
+    letter-spacing: 0.06em;
+    font-style: italic;
+  }
+}
+
+// ── Animations ────────────────────────────────────────
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  20%       { transform: rotate(20deg); }
+  40%       { transform: rotate(-10deg); }
+  60%       { transform: rotate(14deg); }
+  80%       { transform: rotate(-5deg); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  40%       { transform: translateY(-8px); }
+  70%       { transform: translateY(-4px); }
+}
+
+@keyframes float-1 {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(30px, 40px); }
+}
+
+@keyframes float-2 {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(-30px, -30px); }
+}
+
+// ── Responsive ────────────────────────────────────────
+@media (max-width: 480px) {
+  .hero {
+    padding: 5rem 1.5rem 3rem;
+
+    &__moods {
+      gap: 0.6rem;
+    }
+
+    &__mood-item {
+      padding: 0.5rem 0.7rem;
+    }
+
+    &__mood-emoji {
+      font-size: 1.5rem;
+    }
+
+    &__cta {
+      padding: 0.8rem 1.8rem;
+      font-size: 0.95rem;
+    }
+  }
+}

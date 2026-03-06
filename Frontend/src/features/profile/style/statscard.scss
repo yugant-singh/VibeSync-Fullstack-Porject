@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+// ── Variables ──────────────────────────────────────────
+$accent:      #7c6aff;
+$accent-glow: rgba(124, 106, 255, 0.25);
+$accent-soft: rgba(124, 106, 255, 0.1);
+$surface:     rgba(255, 255, 255, 0.04);
+$border:      rgba(255, 255, 255, 0.07);
+$text:        #f0eeff;
+$text-muted:  rgba(240, 238, 255, 0.5);
+
+// ── StatsCard ──────────────────────────────────────────
+.stats-card {
+  padding: 1.5rem;
+  border-radius: 20px;
+  background: $surface;
+  border: 1px solid $border;
+
+  &__title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $text;
+    margin: 0 0 1.2rem;
+    letter-spacing: -0.01em;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+
+    @media (max-width: 480px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 1rem 0.5rem;
+    border-radius: 14px;
+    background: $accent-soft;
+    border: 1px solid rgba(124, 106, 255, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px $accent-glow;
+    }
+  }
+
+  &__emoji {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  &__value {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: $accent;
+    line-height: 1;
+  }
+
+  &__label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: $text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: center;
+  }
+}

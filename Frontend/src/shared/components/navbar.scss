@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+// ── Variables ──────────────────────────────────────────
+$bg:          #0a0a0f;
+$surface:     #111118;
+$border:      rgba(255, 255, 255, 0.07);
+$accent:      #7c6aff;
+$accent-glow: rgba(124, 106, 255, 0.35);
+$text:        #f0eeff;
+$text-muted:  rgba(240, 238, 255, 0.45);
+
+// ── Navbar ─────────────────────────────────────────────
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(10, 10, 15, 0.75);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid $border;
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  // ── Logo ──
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+
+    &-icon {
+      font-size: 1.4rem;
+      color: $accent;
+      filter: drop-shadow(0 0 8px $accent-glow);
+      animation: spin-slow 8s linear infinite;
+    }
+
+    &-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.35rem;
+      color: $text;
+      letter-spacing: -0.02em;
+      margin: 0;
+
+      span {
+        color: $accent;
+        text-shadow: 0 0 20px $accent-glow;
+      }
+    }
+  }
+
+  // ── Links ──
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__link {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: $text-muted;
+    text-decoration: none;
+    padding: 0.45rem 1rem;
+    border-radius: 8px;
+    letter-spacing: 0.01em;
+    position: relative;
+    transition: color 0.2s ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%) scaleX(0);
+      width: 60%;
+      height: 2px;
+      background: $accent;
+      border-radius: 2px;
+      box-shadow: 0 0 8px $accent-glow;
+      transition: transform 0.25s ease;
+    }
+
+    &:hover {
+      color: $text;
+
+      &::after {
+        transform: translateX(-50%) scaleX(1);
+      }
+    }
+
+    &.active {
+      color: $text;
+      background: rgba(124, 106, 255, 0.1);
+
+      &::after {
+        transform: translateX(-50%) scaleX(1);
+      }
+    }
+  }
+
+  // ── Hamburger ──
+  &__hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+
+    @media (max-width: 768px) {
+      display: flex;
+    }
+
+    span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: $text-muted;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    &.open {
+      span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+        background: $accent;
+      }
+      span:nth-child(2) {
+        opacity: 0;
+      }
+      span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+        background: $accent;
+      }
+    }
+  }
+
+  // ── Mobile Menu ──
+  &__mobile {
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.3s ease;
+    background: $surface;
+    border-top: 1px solid $border;
+
+    @media (max-width: 768px) {
+      display: block;
+    }
+
+    &--open {
+      max-height: 300px;
+      padding: 0.75rem 0;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: $text-muted;
+      text-decoration: none;
+      display: block;
+      padding: 0.6rem 0.75rem;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+
+      &:hover,
+      &.active {
+        color: $text;
+        background: rgba(124, 106, 255, 0.1);
+      }
+    }
+  }
+}
+
+// ── Animations ────────────────────────────────────────
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}

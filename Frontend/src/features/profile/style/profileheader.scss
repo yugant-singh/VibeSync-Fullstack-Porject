@@ -1,0 +1,66 @@
+
+
+// ── Variables ──────────────────────────────────────────
+$accent:      #2e17e0;
+$accent-glow: rgba(124, 106, 255, 0.35);
+$accent-soft: rgba(124, 106, 255, 0.15);
+$text:        #f0eeff;
+$text-muted:  rgba(240, 238, 255, 0.5);
+$border:      rgba(255, 255, 255, 0.07);
+
+// ── ProfileHeader ──────────────────────────────────────
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  margin-top: 4rem;
+
+  // ── Avatar ──
+  &__avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: $accent-soft;
+    border: 2px solid rgba(124, 106, 255, 0.4);
+    box-shadow: 0 0 24px $accent-glow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__initials {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: $accent;
+  }
+
+  // ── Info ──
+  &__name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $text;
+    margin: 0;
+    letter-spacing: -0.02em;
+    
+  }
+&__username {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $text;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+  &__email {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: $text-muted;
+    margin: 0;
+  }
+}

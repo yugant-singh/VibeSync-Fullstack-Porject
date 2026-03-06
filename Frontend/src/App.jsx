@@ -3,7 +3,7 @@
 import {routes} from './auth.routes'
 import {RouterProvider} from 'react-router-dom'
 import {AuthProvider} from './features/auth/auth.context.jsx'
-import '../src/style.scss'
+import './style.scss'
 
 
 
