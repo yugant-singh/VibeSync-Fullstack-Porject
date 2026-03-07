@@ -8,6 +8,7 @@ import Profile from './features/profile/pages/Profile'
 import Scan from './features/scan/pages/Scan'
 import History from './features/history/pages/History'
 import Layout from './shared/components/layout/Layout'
+import Results from './features/results/pages/Results'
 
  export const routes = createBrowserRouter([
     {
@@ -25,7 +26,8 @@ import Layout from './shared/components/layout/Layout'
              { index: true, element: <Home /> },
              {path:'profile',element:<Profile/>},
              {path:'scan',element:<Scan/>},
-             {path:'history',element:<History/>}
+             {path:'history',element:<History/>},
+             {path:'results',element:<Results/>}
         ]
     }
 ])

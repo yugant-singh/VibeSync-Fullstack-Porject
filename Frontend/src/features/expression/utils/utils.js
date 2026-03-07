@@ -50,7 +50,7 @@ export const detect = ({ landmarkerRef, videoRef, setExpression }) => {
 
         console.log(getScore("mouthFrownLeft"))
 
-        let currentExpression = "Neutral";
+        let currentExpression = "neutral";
 
         if (smileLeft > 0.5 && smileRight > 0.5) {
             currentExpression = "happy";
@@ -61,5 +61,6 @@ export const detect = ({ landmarkerRef, videoRef, setExpression }) => {
         }
 
         setExpression(currentExpression);
+        return currentExpression
     }
 };

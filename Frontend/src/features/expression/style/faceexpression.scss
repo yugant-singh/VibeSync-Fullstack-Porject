@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+// ── Variables ──────────────────────────────────────────
+$accent:      #7c6aff;
+$accent-glow: rgba(124, 106, 255, 0.35);
+$accent-soft: rgba(124, 106, 255, 0.1);
+$surface:     rgba(255, 255, 255, 0.04);
+$border:      rgba(255, 255, 255, 0.07);
+$text:        #f0eeff;
+$text-muted:  rgba(240, 238, 255, 0.5);
+$bg:          #0a0a0f;
+
+// ── FaceExpression ─────────────────────────────────────
+.face-expression {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 6rem 2rem 4rem;
+  background: $bg;
+
+  // ── Header ──
+  &__header {
+    text-align: center;
+  }
+
+  &__title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: $text;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  &__subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: $text-muted;
+    margin: 0.4rem 0 0;
+  }
+
+  // ── Video Wrapper ──
+  &__video-wrapper {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 2px solid rgba(124, 106, 255, 0.4);
+    box-shadow: 0 0 32px $accent-glow;
+    background: #0d0d14;
+  }
+
+  &__video {
+    width: 420px;
+    max-width: 90vw;
+    display: block;
+    border-radius: 22px;
+
+    @media (max-width: 480px) {
+      width: 100%;
+    }
+  }
+
+  // ── Loader ──
+  &__loader {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    background: #0d0d14;
+    z-index: 1;
+
+    span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: $accent;
+      animation: loader-bounce 1.2s ease-in-out infinite;
+
+      &:nth-child(2) { animation-delay: 0.2s; }
+      &:nth-child(3) { animation-delay: 0.4s; }
+    }
+  }
+
+  // ── Result ──
+  &__result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 80px;
+    justify-content: center;
+  }
+
+  &__emoji {
+    font-size: 3rem;
+    line-height: 1;
+    animation: pop 0.4s ease;
+  }
+
+  &__mood {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: $accent;
+    text-transform: capitalize;
+    margin: 0;
+    text-shadow: 0 0 20px $accent-glow;
+    animation: pop 0.4s ease;
+  }
+
+  &__detecting {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: $text-muted;
+    margin: 0;
+    font-style: italic;
+  }
+
+  // ── Button ──
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 2.2rem;
+    background: linear-gradient(135deg, $accent, #9b8fff);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 24px $accent-glow;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 32px $accent-glow;
+
+      .face-expression__btn-arrow {
+        transform: translateX(4px);
+      }
+    }
+
+    &:active:not(:disabled) {
+      transform: scale(0.98);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__btn-arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+}
+
+// ── Animations ────────────────────────────────────────
+@keyframes loader-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50%       { transform: translateY(-8px); opacity: 1; }
+}
+
+@keyframes pop {
+  0%   { transform: scale(0.7); opacity: 0; }
+  70%  { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}

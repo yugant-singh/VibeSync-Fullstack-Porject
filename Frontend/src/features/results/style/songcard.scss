@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+// ── Variables ──────────────────────────────────────────
+$accent:      #7c6aff;
+$accent-glow: rgba(124, 106, 255, 0.35);
+$accent-soft: rgba(124, 106, 255, 0.1);
+$surface:     rgba(255, 255, 255, 0.04);
+$border:      rgba(255, 255, 255, 0.08);
+$text:        #f0eeff;
+$text-muted:  rgba(240, 238, 255, 0.5);
+$bg:          #0a0a0f;
+
+// ── SongCard ───────────────────────────────────────────
+.song-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid $border;
+  width: 100%;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  // ── Poster ──
+  &__poster-wrapper {
+    flex-shrink: 0;
+    width: 110px;
+    height: 110px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+
+    @media (max-width: 768px) {
+      width: 90px;
+      height: 90px;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 480px) {
+      width: 70px;
+      height: 70px;
+      border-radius: 8px;
+    }
+  }
+
+  &__poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  // ── Content ──
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-width: 0;
+     overflow: hidden;
+    min-width: 0;
+  }
+
+  // ── Info ──
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  &__title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $text;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: -0.01em;
+
+    @media (max-width: 480px) {
+      font-size: 0.88rem;
+    }
+  }
+
+  &__mood {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    color: $text-muted;
+    text-transform: capitalize;
+
+    @media (max-width: 480px) {
+      font-size: 0.72rem;
+    }
+  }
+
+  // ── Progress ──
+  &__progress-wrapper {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  &__progress-bar {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+
+    &:hover .song-card__progress-thumb {
+      opacity: 1;
+    }
+
+    @media (max-width: 480px) {
+      height: 3px;
+    }
+  }
+
+  &__progress-fill {
+    height: 100%;
+    background: $text;
+    border-radius: 4px;
+    transition: width 0.1s linear;
+  }
+
+  &__progress-thumb {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: $text;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+
+    @media (max-width: 480px) {
+      width: 10px;
+      height: 10px;
+    }
+  }
+
+  &__time {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.35rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    color: $text-muted;
+
+    @media (max-width: 480px) {
+      font-size: 0.65rem;
+    }
+  }
+
+  // ── Controls ──
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    @media (max-width: 480px) {
+      gap: 0.75rem;
+    }
+  }
+
+  &__ctrl-btn {
+    background: none;
+    border: none;
+    color: $text;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+
+    svg {
+      width: 22px;
+      height: 22px;
+
+      @media (max-width: 480px) {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    &:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+
+  &__play-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: $text;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0a0a0f;
+    transition: transform 0.2s ease, background 0.2s ease;
+    flex-shrink: 0;
+
+    @media (max-width: 480px) {
+      width: 36px;
+      height: 36px;
+    }
+
+    svg {
+      width: 22px;
+      height: 22px;
+
+      @media (max-width: 480px) {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    &:hover {
+      transform: scale(1.08);
+      background: rgba(240, 238, 255, 0.85);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}

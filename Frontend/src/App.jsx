@@ -4,6 +4,7 @@ import {routes} from './auth.routes'
 import {RouterProvider} from 'react-router-dom'
 import {AuthProvider} from './features/auth/auth.context.jsx'
 import './style.scss'
+import { SongContextProvider } from './features/scan/song.context.jsx'
 
 
 
@@ -13,7 +14,9 @@ function App() {
   return ( 
  
    <AuthProvider>
-     <RouterProvider router = {routes}/>
+  <SongContextProvider>
+       <RouterProvider router = {routes}/>
+  </SongContextProvider>
    </AuthProvider>
 
   )
