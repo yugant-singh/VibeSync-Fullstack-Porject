@@ -12,12 +12,17 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null)
   const navigate = useNavigate()
  
 async function handleSubmit(e){
 e.preventDefault()
 
-await handleRegister({username,email,password,name})
+ const err = await handleRegister({username,email,password,name})
+ if (err) {
+    setError(err)
+    return
+  }
 navigate("/")
 
 }
@@ -66,6 +71,7 @@ navigate("/")
             onChange={(e) => setPassword(e.target.value)}
           />
 
+{error && <p className="error-msg">{error}</p>}
           <button   >
           Register
           </button>
