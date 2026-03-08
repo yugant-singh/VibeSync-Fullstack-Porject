@@ -7,6 +7,13 @@ const redis  = require("../config/cache")
 async function registerController(req, res) {
     try {
         const { username, email, password, name, profile_url } = req.body
+        console.log(req.body)
+         if (!username || !email || !password || !name) {
+            return res.status(400).json({
+                message: "All fields are required"
+            })
+        }
+
         const isAlreadyExist = await userModel.findOne({
             $or: [
                 {
@@ -22,6 +29,7 @@ async function registerController(req, res) {
             })
         }
 
+        
         const hash = await bcrypt.hash(password, 10)
 
         const user = await userModel.create({
@@ -65,6 +73,11 @@ async function registerController(req, res) {
 async function loginController(req, res) {
     try {
         const { username, email, password } = req.body
+         if (!username || !password ) {
+            return res.status(400).json({
+                message: "All fields are required"
+            })
+        }
         const user = await userModel.findOne({
             $or: [
                 { username},
